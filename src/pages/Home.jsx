@@ -60,14 +60,14 @@ const Home = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black opacity-70"></div>
         <div className="relative z-10 text-center text-white px-4 sm:px-6">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-wide drop-shadow-md animate-fadeIn">
-            Welcome to <span className="text-blue-300">Bida App</span>
+            Welcome to <span className="text-yellow-400">Bida App</span>
           </h1>
           <p className="mt-4 sm:mt-6 text-sm sm:text-base md:text-lg lg:text-xl font-medium text-gray-100 drop-shadow-sm animate-fadeInDelay">
             Explore new opportunities and connect with amazing people.
           </p>
           <a
             href="/projects"
-            className="mt-6 sm:mt-8 inline-block bg-blue-500 hover:bg-blue-600 text-white text-sm sm:text-base md:text-lg px-6 sm:px-8 py-2 sm:py-3 rounded-full shadow-lg transition-transform transform hover:scale-105"
+            className="mt-6 sm:mt-8 inline-block bg-yellow-400 hover:bg-yellow-500 text-purple-800 text-sm sm:text-base md:text-lg px-6 sm:px-8 py-2 sm:py-3 rounded-full shadow-lg transition-transform transform hover:scale-105"
           >
             Get Started
           </a>
@@ -85,7 +85,7 @@ const Home = () => {
       )}
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8">
+      <footer className="bg-gradient-to-r from-teal-600 to-purple-600 text-white py-8">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row justify-between items-center">
             <div className="text-center sm:text-left mb-4 sm:mb-0">
