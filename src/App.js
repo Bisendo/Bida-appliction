@@ -16,9 +16,8 @@ import AdminService from './Components/ServiceAdmin';
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-gray-100"> {/* Background color for full screen */}
+      <div className="bg-gray-200 min-h-screen min-w-full"> {/* Background color for full screen */}
         {/* <Navbar /> */}
-        <div className="container mx-auto p-4">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
@@ -32,7 +31,6 @@ function App() {
             <Route path="/admin/contacts" element = {<ContactAdmin/>}/>            
             <Route path="/admin/services" element = {<AdminService/>}/>
           </Routes>
-        </div>
       </div>
     </Router>
   );

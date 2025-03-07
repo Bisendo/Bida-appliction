@@ -1,139 +1,149 @@
 import React, { useState, useEffect } from "react";
-import { FaArrowUp } from "react-icons/fa"; // Importing scroll icon
-import Footer from "../Components/Footer";
+import {
+  FaArrowUp,
+  FaFacebookF,
+  FaTwitter,
+  FaInstagram,
+  FaTiktok,
+  FaLinkedinIn,
+  FaYoutube,
+} from "react-icons/fa";
 import Navbar from "../Components/Navibar";
-
-// Importing multiple images
-import img1 from "../assets/images/01.jpg";
-import img2 from "../assets/images/02.jpg";
-import img3 from "../assets/images/03.jpg";
-import img4 from "../assets/images/04.jpg";
-import img5 from "../assets/images/05.jpg";
-import img6 from "../assets/images/06.jpg";
-
-const images = [img1, img2, img3, img4, img5, img6];
+import image1 from "../assets/images/01.jpg";
+import image2 from "../assets/images/02.jpg";
+import image3 from "../assets/images/03.jpg";
+import image4 from "../assets/images/04.jpg";
+import image5 from "../assets/images/05.jpg";
+import image6 from "../assets/images/06.jpg";
 
 const Home = () => {
-  const [index, setIndex] = useState(0);
-  const [animateText, setAnimateText] = useState(false);
-  const [showScroll, setShowScroll] = useState(false); // State for scroll button visibility
+  const [showTopButton, setShowTopButton] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+  const [currentBackground, setCurrentBackground] = useState(0);
+  const backgroundImages = [image1, image2, image3, image4, image5, image6];
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 5000);
-
-    const textAnimationTimeout = setTimeout(() => {
-      setAnimateText(true);
-    }, 1000);
-
-    return () => {
-      clearInterval(interval);
-      clearTimeout(textAnimationTimeout);
-    };
-  }, []);
-
-  // Handle scroll event to show/hide the scroll-to-top button
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 300) {
-        setShowScroll(true);
-      } else {
-        setShowScroll(false);
-      }
+      setScrollY(window.scrollY);
+      setShowTopButton(window.scrollY > 300);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Function to scroll to top
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentBackground((prev) => (prev + 1) % backgroundImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [backgroundImages.length]);
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
-    <div className="bg-gray-50">
-      {/* Fixed Navbar */}
-      <div className="fixed top-0 left-0 w-full z-50 bg-white shadow-md">
+    <div className="relative flex flex-col min-h-screen">
+      {/* Navbar */}
+      <div className="fixed top-0 left-0 w-full z-50 bg-white shadow-md animate-fadeInDown">
         <Navbar />
       </div>
 
-      {/* Hero Section with increased margin */}
-      <div className="mt-24 relative h-[60vh] sm:h-[80vh] md:h-screen overflow-hidden flex items-center justify-center">
-        {/* Background Image Container */}
-        <div className="absolute inset-0 w-full h-full flex items-center justify-center transition-opacity duration-1000">
-          {images.map((img, i) => (
-            <div
-              key={i}
-              className={`absolute inset-0 w-full h-full bg-cover bg-center transition-opacity duration-1000 ${
-                i === index ? "opacity-100 scale-105" : "opacity-0 scale-95"
-              }`}
-              style={{
-                backgroundImage: `url(${img})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            ></div>
-          ))}
-        </div>
-
-        {/* Hero Content */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4">
-          <h1
-            className={`text-4xl sm:text-5xl md:text-6xl font-bold mb-6 transition-all duration-1000 ${
-              animateText ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-            }`}
-          >
-            Welcome to Bida App
+      {/* Hero Section */}
+      <section
+        className="relative flex items-center justify-center h-screen bg-cover bg-center bg-no-repeat transition-all duration-1000"
+        style={{
+          backgroundImage: `url(${backgroundImages[currentBackground]})`,
+          backgroundPositionY: `${scrollY * 0.5}px`,
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black opacity-70"></div>
+        <div className="relative z-10 text-center text-white px-4 sm:px-6">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-wide drop-shadow-md animate-fadeIn">
+            Welcome to <span className="text-blue-300">Bida App</span>
           </h1>
-          <p
-            className={`text-lg sm:text-xl md:text-2xl mb-6 transition-all duration-1000 delay-200 ${
-              animateText ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-            }`}
-          >
-            Discover new opportunities and connect with amazing people.
+          <p className="mt-4 sm:mt-6 text-sm sm:text-base md:text-lg lg:text-xl font-medium text-gray-100 drop-shadow-sm animate-fadeInDelay">
+            Explore new opportunities and connect with amazing people.
           </p>
           <a
-            href="/explore"
-            className="px-6 py-3 sm:px-8 sm:py-4 text-lg font-semibold bg-blue-800 text-white rounded-full shadow-lg transition-transform duration-300 hover:bg-blue-700 hover:scale-105"
+            href="/projects"
+            className="mt-6 sm:mt-8 inline-block bg-blue-500 hover:bg-blue-600 text-white text-sm sm:text-base md:text-lg px-6 sm:px-8 py-2 sm:py-3 rounded-full shadow-lg transition-transform transform hover:scale-105"
           >
-            Explore Bida App
+            Get Started
           </a>
-        </div>
-      </div>
-
-      {/* Features Section */}
-      <section className="py-12 px-6 bg-gray-100 text-center">
-        <h2 className="text-4xl font-semibold text-gray-800 mb-8">Why Choose Bida App?</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          <div className="bg-white shadow-lg rounded-lg p-6 hover:bg-blue-50 transition duration-300">
-            <h3 className="text-2xl font-semibold text-gray-800 mb-4">Connect</h3>
-            <p className="text-gray-600">Meet and network with like-minded individuals.</p>
-          </div>
-          <div className="bg-white shadow-lg rounded-lg p-6 hover:bg-blue-50 transition duration-300">
-            <h3 className="text-2xl font-semibold text-gray-800 mb-4">Opportunities</h3>
-            <p className="text-gray-600">Explore career and business opportunities.</p>
-          </div>
-          <div className="bg-white shadow-lg rounded-lg p-6 hover:bg-blue-50 transition duration-300">
-            <h3 className="text-2xl font-semibold text-gray-800 mb-4">Grow</h3>
-            <p className="text-gray-600">Develop skills and knowledge through various resources.</p>
-          </div>
         </div>
       </section>
 
-      {/* Scroll to Top Button */}
-      {showScroll && (
+      {/* Scroll-to-Top Button */}
+      {showTopButton && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 bg-yellow-400 text-blue-800 p-3 rounded-full shadow-lg transition-all duration-300 hover:bg-blue-700 hover:scale-110"
+          className="fixed bottom-8 right-8 p-3 bg-blue-500 hover:bg-blue-600 text-white rounded-full shadow-lg transition-transform transform hover:scale-110"
         >
-          <FaArrowUp size={24} />
+          <FaArrowUp className="w-5 h-5" />
         </button>
       )}
 
       {/* Footer */}
-      <Footer />
+      <footer className="bg-gray-900 text-white py-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row justify-between items-center">
+            <div className="text-center sm:text-left mb-4 sm:mb-0">
+              <p className="text-sm">&copy; 2023 Bida App. All rights reserved.</p>
+            </div>
+            <div className="flex space-x-4">
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-300 hover:text-blue-500 transition-colors"
+              >
+                <FaFacebookF className="w-5 h-5" />
+              </a>
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-300 hover:text-blue-400 transition-colors"
+              >
+                <FaTwitter className="w-5 h-5" />
+              </a>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-300 hover:text-pink-500 transition-colors"
+              >
+                <FaInstagram className="w-5 h-5" />
+              </a>
+              <a
+                href="https://tiktok.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-300 hover:text-black transition-colors"
+              >
+                <FaTiktok className="w-5 h-5" />
+              </a>
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-300 hover:text-blue-600 transition-colors"
+              >
+                <FaLinkedinIn className="w-5 h-5" />
+              </a>
+              <a
+                href="https://youtube.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-300 hover:text-red-600 transition-colors"
+              >
+                <FaYoutube className="w-5 h-5" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
