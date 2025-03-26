@@ -16,10 +16,10 @@ import Navbar from "../Components/Navibar";
 const passions = [
   {
     icon: <FaHeart className="text-red-500" size={50} />,
-    title: "Love & Relationships",
-    desc: "Building meaningful connections, spreading love, and fostering compassion.",
+    title: "Happy Birthday",
+    desc: "HI! BIDAUS HONGERA KWA KUONGEZA MWAKA MWINGINE.",
     detail:
-      "Love is the foundation of all relationships. It’s about understanding, empathy, and creating bonds that last a lifetime.",
+      "Hongera kwa kutimiza mwaka mwingine! Hakika wewe ni mtu MUHIMU kwenye Maisha yako",
   },
   {
     icon: <FaMusic className="text-blue-500" size={50} />,

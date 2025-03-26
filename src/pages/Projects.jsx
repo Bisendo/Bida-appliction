@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FaFacebook, FaInstagram, FaTwitter, FaArrowUp, FaChurch, FaUser, FaCog, FaBriefcase } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaTwitter, FaArrowUp, FaUser, FaCog, FaBriefcase } from "react-icons/fa";
 import Navbar from "../Components/Navibar";
 import heroImage from "../assets/images/04.jpg";
 
@@ -35,7 +35,6 @@ const ProjectPage = () => {
 
   // List of completed projects
   const completedProjects = [
-    { title: "Church webApp", description: "A web application for managing church activities. You can view it here:", url: "https://church-site-alpha.vercel.app/", icon: <FaChurch size={28} /> },
     { title: "Uzanow webApp", description: "A social networking app for professionals. You can view it here:", url: "https://test-application-psi.vercel.app/", icon: <FaUser size={28} /> },
     { title: "Murimi WebApp", description: "A web app for farmers to manage their agricultural activities. You can view it here:", url: "https://mrimi-ukoo-frontend.vercel.app/", icon: <FaCog size={28} /> },
     { title: "Bida webApp", description: "A product management application to streamline business operations. You can view it here:", url: "https://bida-appliction.vercel.app/", icon: <FaBriefcase size={28} /> },
